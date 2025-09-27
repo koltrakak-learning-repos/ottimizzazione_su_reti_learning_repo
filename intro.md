@@ -20,7 +20,7 @@ Queand'è che non è immediato sapere che una soluzione è ottima?
 super interessante l'origine del concetto della dualità: rilassamento lagrangiano
 - se il problema di ottimizzazione non è vincolato, basta studiare dove la derivata si annulla
 - sarebbe bello ricondursi a questo caso
-- possiamo allora spostare i vincoli nella funzione obiettivo aggiungendo dei pesi che peggiorano la mia funzione obiettivo nelle posizioni non ammissibili, e la migliorano nelle posizioni ammissibili 
+- possiamo allora spostare i vincoli nella funzione obiettivo aggiungendo dei pesi che peggiorano la mia funzione obiettivo nelle posizioni non ammissibili, e la migliorano nelle posizioni ammissibili
 
 
 complementary slackness mi dice una cosa super semplice:
@@ -57,6 +57,6 @@ terminologia
 - un cammino è una sequenza di **LATI/ARCHI**, non di vertici
 - un cammino **NON ha ripetizioni di vertici**
 
-
+**IMPORTANTE**
 con n si intende il numero di vertici di un grafo
 con m si intende il numero di lati

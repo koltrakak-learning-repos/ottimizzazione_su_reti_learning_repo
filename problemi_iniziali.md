@@ -1,26 +1,61 @@
-importanti perchè spesso saltano fuori in problemi più complessi come sotto-problemi
+questi problemi iniziali sono importanti perchè spesso saltano fuori in problemi più complessi come sotto-problemi
 
-# Shortest spanning tree (albero ricoprente di costo minimo)
-Un'albero è un grafo, connesso, che non contiene circuiti
-- equivalentemente, un grafo connesso che contiene n-1 lati (altrimenti circuiti)
-- equivalentemente, per ogni coppia di vertici, esiste un solo cammino che li connette
+# Shortest Spanning Tree (albero ricoprente di costo minimo)
+Un'albero è un grafo, **connesso**, che non contiene circuiti (per ogni coppia di nodi esiste un **percorso** (ricorda che i percorsi non hanno ripetizioni di vertici) che li connette)
+- equivalentemente
+    - un grafo connesso che contiene n-1 lati (altrimenti circuiti)
+    - oppure, per ogni coppia di vertici, esiste un solo cammino che li connette
 
-Uno spanning tree è un sottografo con gli stessi vertici ma con un sottoinsieme dei lati che lo rende un albero
+Uno Spanning Tree (ST) di un grafo
+- è un sottografo con gli stessi vertici di quest'ultimo
+    - l'albero deve toccare **tutti** i vertici
+- ma con un sottoinsieme dei lati tale da renderlo un albero
 
-teorema di Prim:
-- considera un sottografo che è un albero
-- considera i vertici vicini non facenti parte dell'albero
-- costruisci un nuovo albero, prendendo il lato di costo minimo che prende uno di questi vertici
+Lo Shortest Spanning Tree problem (SST) si chiede:
+- dato un grafo connesso e pesato,
+- qual'è lo ST con la somma dei pesi dei lati minima?
+- applicazione: connect towns through (water, gas, ...) pipelines at minimum cost;
 
-Algoritmo:
-- i grafi connessi in generale hanno o(n^2) lati 
+### Teorema di Prim:
+- Dato un grafo, considera un suo sottografo che forma un albero di copertura parziali
+- considera il lato di costo minimo tra quelli che hanno un vertice appartenente all'albero parziale, e l'altro appartenente ai nodi non ancora considerati
+- lo spanning tree ottimo del grafo, che contiene l'albero parziale corrente, conterrà anche questo lato
+    - se l'albero parziale è ottimo, anche l'albero parziale con questo nuovo lato continuerà ad essere ottimo
+- `questo teorema ci dice che possiamo risolvere SST partendo da un vertice e aggiungendo volta per volta il lato migliore tra quelli rimasti (greedy)`
+    - troviamo l'ottimo globale facendo scelte ottime locali
+
+### Algoritmo Naive:
+In pratica applico il teorema di Prim
+- parto con un vertice e basta (per forza ottimo)
+- continuo ad aggiungere il lato minimo fino a che non ho visitato tutti i vertici
+
+Complessità:
+- ho n vertici e devo trovare per n-1 volte il lato minimo
+- i grafi connessi in generale hanno o(n^2) lati
+    - ad esempio, se il grafo è completo, ed ho visitato k vertici e me ne rimangono h da visitare, allora ho k*h lati (o(n^2)) tra cui cercare quello minimo
 - con un algoritmo semplice la complessità è o(n^3) cerco tra tutti i lati (n^2) quello più corto per n volte (finch'è non ho tutti i vertici)
 
-un'algoritmo più intelligente (algoritmo di prim):
-- uso un nuovo concetto di predecessore, il vertice che ho già visitato più vicino a me
-    - prima mi focalizzavo sui lati, che sono sempre o(n^2)
-    - ora, aggiorno i predecessori, ...
-- uso delle etichette che mi tengono traccia del predecessore di ogni vertice
+### Algoritmo di Prim
+un'algoritmo più intelligente per SST:
+- uso un nuovo concetto di **predecessore**, il vertice che ho già visitato più vicino a me
+    - il predecessore di un vertice che non ho visitato (v), è un vertice appartenente a quelli che ho già visitato (u) tale che il costo del lato (u, v) è il minimo possibile
+- ogni nodo non visitato viene etichettati a priori con il suo predecessore
+- adesso, cerchiamo il prossimo vertice da aggiungere considerando solo i predecessori e non tutti i lati
+    - consideriamo sempre il lato di costo minimo
+- aggiunto il nuovo vertice, scorro tutti i vertici rimasti per aggiornare le etichette in caso il nuovo vertice sia un predecessore migliore
+
+Complessità:
+- ho sempre n-1 vertici da aggiungere
+- prima mi esploravo o(n^2) lati ad ogni operazione
+- ora controllo/aggiorno solamente i predecessori che sono V\W (o(n))
+    - non devo considerare tutti i nodi già aggiunti, solo il predecessore
+    - quando aggiorno i predecessori devo solo fare un confronto con il nuovo vertice aggiunto
+- complessità finale è quindi o(n^2)
+
+
+
+
+
 
 # Data structures for representing graphs
 sostanzialmente mi devo chiedere se il mio grafo è denso o è sparso (molti lati / pochi lati) per decidere quale struttura dati usare
@@ -35,6 +70,11 @@ se il grafo è sparso -> liste di adiacenza (non so perchè nella slide non vien
 - questa struttutra dati mi occupa spazio proporzionale al numero di lati
 - ma per accedere ad un lato devo scorrere la lista (magari con ricerca binaria se la lista è ordinata)
     - interessante, se voglio fare ricerca binaria non posso rappresentare la lista come linked list
+
+
+
+
+
 
 # Shortest path problem (problema del cammino minimo)
 
