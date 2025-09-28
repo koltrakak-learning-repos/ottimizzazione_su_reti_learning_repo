@@ -60,3 +60,21 @@ terminologia
 **IMPORTANTE**
 con n si intende il numero di vertici di un grafo
 con m si intende il numero di lati
+
+
+
+- 𝑁 +(𝑣) = { 𝑢 ∈ 𝑉 : (𝑣 , 𝑢) ∈ A } i successori di 𝑣 
+    - (vertici raggiungibili da 𝑣 con un arco uscente).
+
+- 𝑁 −(𝑣) = { 𝑢 ∈ 𝑉 : (𝑢 , 𝑣) ∈ A } i predecessori di 𝑣 
+    - (vertici che hanno un arco entrante in 𝑣).
+
+- 𝑁 (𝑣) 
+    - i vicini (o vertici adiacenti) di 𝑣 v, indipendentemente dalla direzione.
+
+
+
+
+
+
+
