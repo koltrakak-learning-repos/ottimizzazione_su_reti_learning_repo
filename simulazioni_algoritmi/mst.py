@@ -2,7 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import random
 
-NUM_NODES = 7
+NUM_NODES = 8
 EDGE_PROB = 0.3
 # continua a creare un grafo con 
 #   - n nodi
