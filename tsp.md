@@ -77,7 +77,7 @@ Come facciamo?
 
 - risolviamo un rilassamento in cui ignoriamo i subtour elimination constraint
 - vedremo poi che abbiamo un modo per controllare se la soluzione del rilassamento viola o meno uno di questi vincoli
-- a questo punto aggiungiamo il vincolo, iteriamo e prima o poi convergiamo
+- a questo punto aggiungiamo il vincolo, iteriamo facendo branch and bound, e prima o poi convergiamo
 
 Abbiamo visto la dimostrazione che i subtour elimination constraint nella seconda forma sono equivalenti a quelli nella prima forma
 
@@ -92,3 +92,5 @@ il modello è molto simile a prima
 
 - i degree constraint ora considerano lati e quindi la somma dei lati incidenti di ogni nodo deve valere 2
 - i subtour constraint sono praticamente uguali
+
+Oss: esistono anche dei modelli con un numero polinomiale di vincoli MTZ, ma nella pratica, seppur siano validi, non si riescono a risolvere
