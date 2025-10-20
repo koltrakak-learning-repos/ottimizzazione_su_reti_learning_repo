@@ -71,3 +71,7 @@ By replacing constraints xij ∈ {0, 1} with xij ≥ 0 (rilassamento continuo) p
 **anche il problema dell'assegnamento si può risolvere tramite LP del suo rilassamento continuo**
 
 Tuttavia, stesso discorso di prima, se risolvo con un modello sono flessibile, ma Hungarian algorythm lo risolve con molta più efficenza
+
+```
+A quanto pare ci fermiamo a slide 22
+```
