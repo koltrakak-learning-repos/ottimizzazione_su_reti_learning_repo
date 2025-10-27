@@ -55,7 +55,7 @@ voglio un vincolo più compatto ed efficace
 
 - tutte le volte che c'è un subtour, c'è un sottoinsieme stretto (non tutti) dei vertici del grafo da cui non stiamo uscendo
 - equivalentemente, ci sono dei sottoinsiemi di vertici da cui stiamo prendendo troppi archi (es. tre vertici e tre lati) e quindi i vincoli di grado mi impediscono di uscire
-- un vincolo migliore è quindi quello che mi dice che per ogni sottoinsieme S posso prendere al massimo ||S|| - 2 archi
+- un vincolo migliore è quindi quello che mi dice che per ogni sottoinsieme S posso prendere al massimo ||S|| - 1 archi
   - inoltre, abbiamo un ulteriore vincolo che ci dice che 2 <= || S || <= n - 2
   - non considero i sottoinsiemi formati da un solo vertice dato che questi non posso formare cicli
   - non considero i sottoinsiemi formati da n-2 vertici dato che non rispetterei i vincoli di grado
