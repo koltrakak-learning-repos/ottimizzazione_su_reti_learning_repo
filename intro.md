@@ -43,11 +43,12 @@ algoritmi pseudopolinomiali:
 
 ...
 
-terminologia
+**terminologia**
 
 - multigrafi non aggiungono tanto e quindi gli ignoriamo
-
 - la differenza tra lati e archi non deve confondere per quanto riguarda l'essere un multigrafo o meno
+
+con delta si indica il grado di un vertice, con ro si indicano i successori/predecessori
 
 - abbiamo anche il concetto di gamma(v) oltre che a delta(v), in cui consideriamo i vertici e non i lati
 

@@ -33,6 +33,7 @@ Il **valore di un taglio** misura la somma delle capacità degli archi che vanno
 **NB**: i tagli sono importanti dato che mi rappresentano i colli di bottiglia della mia rete di flusso
 
 - il taglio minimo (quello di valore più piccolo) mi definisce il flusso massimo che riesco a mandare da s a t
+- intuitivamente il taglio minimo mi mostra i punti che formano il collo di bottiglia dato che non riesco a mandare più flusso di quello che le capacità del taglio minimo riescono a gestire
 - vedi meglio dopo
 
 # Teorema di Ford-Fulkerson
@@ -41,22 +42,30 @@ Quello che è stato detto sopra: ```il taglio minimo (quello di valore più picc
 
 La dimostrazione ci convince del fatto che il taglio minimo definisce anche il flusso massimo che si riesce a mandare
 
-- potrebbe venire il dubbio che il flusso che si riesce a mandare sia minore del taglio minimo. Non è questo il caso
+- potrebbe venire il dubbio che il flusso che si riesce a mandare sia minore del taglio minimo. Non è questo il caso, le due quantità sono strettamente uguali
 
 ### DIM
 
 - partiamo con un taglio che contiene solo s in V1 e un flusso ammissibile per la rete
-- poi cominciamo ad aggiungere vertici a V1 fino a che:
+- poi cominciamo ad aggiungere vertici a V1 fino a quando:
   - ci sono archi con capacità residua (e_ij < q_ij) tra vertici in V1 e V2
-  - oppure fino a quando esiste un vj che ha flusso all'indietro (q_ji > 0)
+  - oppure fino a quando esiste un vj che ha flusso all'indietro (e_ji > 0)
     - i flussi che tornano indietro non ci piacciono dato che sembra essere un zero sum game
     - se qualcosa torna indietro è strettamente una perdita.
     - (te ne convincio continuando)
 - smetto di aggiungere vertici in V1 in due situazioni:
-    1. sono riuscito a ragigungere t
-        - questo significa che c'è una catena (che chiameremo aumentante) di archi tutti con della capacità residua/negativa dato che aggiungo solo vertici di questo tipo
+    1. sono riuscito a raggiungere t
+        - questo significa che c'è una catena (che chiameremo aumentante) di archi tutti con della capacità residua/flussi negativi dato che aggiungo solo vertici di questo tipo
         - ora **posso aumentare il flusso** dove ho capacità residua e diminuirlo dove mi torna indietro
-            - il valore per cui posso aumentare il flusso è definito come minimo di roba (guarda slide che capisci)
+            - il valore per cui posso aumentare il flusso è definito come delta = min{delta1, delta2}
+                - con delta1 = min{capacità residue dei forward arc}
+                - con delta2 = min{flussi negativi dei backward arc}
+            - aumento il flusso totale di un valore pari a delta
+                - incrementando di delta i flussi dei forward arc
+                - decrementando di delta i flussi dei backward arc
+                - intuitivamente, devo considerare il minimo di tutto dato che
+                    - non posso incrementare di delta se la capacità mi limita
+                    - non posso decrementare di delta se arrivo prima a zero
             - la dimostrazione ci convince del fatto che questo mantiene l'ammissibilità del flusso
         - a questo punto sono contento dato che ho migliorato la mia rete di flusso, possiamo ricominciare da capo e vedere dove finiamo
         - **NB**:
@@ -65,9 +74,11 @@ La dimostrazione ci convince del fatto che il taglio minimo definisce anche il f
             - chiamiamo **backward arc** un arco che collega vi con vj e che ha verso a_ji
 
     2. non ho raggiunto t
-        - questo significa che c'è un arco il cui flusso è uguale alla sua capacità, oppure che il flusso all'indietro vale 0
-        - in questo caso il flusso vale quanto il taglio (le capacità associate agli archi del taglio sono massimizzate)
-        - **NB**: siccome il flusso non può essere maggiore del valore del taglio (siamo limitati dalle capacità), **abbiamo trovato il flusso ottimo!**
+        - questo significa che per tutti gli archi tra V1 e V2: il flusso è uguale alla loro capacità, oppure che il flusso all'indietro vale 0
+        - ma allora il valore del flusso da s a t vale quanto il taglio
+            - ho costruito il taglio popolando V1 e togliendo da V2
+            - le capacità associate agli archi del taglio sono massimizzate
+        - **abbiamo trovato il flusso ottimo!**
             - abbiamo incrementato iterativamente il flusso con il caso 1, fino a convergere nell'ottimo con il caso 2
         - **NB**: notiamo che una volta che troviamo il taglio, identifichiamo gli archi che rappresentano il collo di bottiglia per il flusso (sono proprio quelli del taglio)
 

@@ -47,19 +47,26 @@ Come rappresentiamo i vincoli?
 Questo è sufficente per essere sicuro che il tour parta e finisca nello stesso nodo?
 
 - no, questo modello non è sufficente; mi può portare ad avere dei subtour separati (cicli di lunghezza minore n-1)
-- potrei evitare la situazione dei subtour aggiungiamo un ulteriore vincola che vieta i subtour impedendomi di prendere tutti gli archi di una determinata istanza di subtour
-  - tuttavia anche il numero di subtour è combinatorio e quindi il numero di vincoli diventerebbe enorme
-  - questi vincoli non mi piacciono tanto
 
-voglio un vincolo più compatto ed efficace
+Potrei evitare la situazione dei subtour aggiungendo vincoli che vietano i subtour impedendomi di prendere tutti gli archi di una determinata istanza di subtour
+
+- tuttavia anche il numero di subtour è combinatorio e quindi il numero di vincoli diventerebbe enorme, e quindi questi vincoli non mi piacciono tanto
+  - per un sottoinsieme di vertici grande k, posso avere (k-1)! subtour
+  - dato il primo nodo, ho k-1 scelte per il prossimo e così via
+
+Voglio un vincolo più compatto ed efficace
 
 - tutte le volte che c'è un subtour, c'è un sottoinsieme stretto (non tutti) dei vertici del grafo da cui non stiamo uscendo
 - equivalentemente, ci sono dei sottoinsiemi di vertici da cui stiamo prendendo troppi archi (es. tre vertici e tre lati) e quindi i vincoli di grado mi impediscono di uscire
-- un vincolo migliore è quindi quello che mi dice che per ogni sottoinsieme S posso prendere al massimo ||S|| - 1 archi
-  - inoltre, abbiamo un ulteriore vincolo che ci dice che 2 <= || S || <= n - 2
-  - non considero i sottoinsiemi formati da un solo vertice dato che questi non posso formare cicli
-  - non considero i sottoinsiemi formati da n-2 vertici dato che non rispetterei i vincoli di grado
+
+Un vincolo migliore è quindi quello che mi dice che per ogni sottoinsieme S posso prendere al massimo ||S|| - 1 archi
+
+- inoltre, abbiamo un ulteriore vincolo che ci dice che 2 <= || S || <= n - 2
+  - notare il minore uguale
+  - non c'è bisogno di esprimere i SEC per subtour grandi 1 o n-1 (grande 1 dall'altro lato) dato che i vincoli di grado mi impediscono già soluzioni di questo tipo
 - abbiamo dimostrato che questo vincolo seppur combinatorio è più tight di quello sopra e quindi sono sicuramente di meno
+  - intuitivamente, prima avevo un vincolo separato per ognuno dei (k-1)! subtour del sottoinsieme di vertici che stavo considerando
+  - ora dato un sottoinsieme di vertici ho un unico vincolo
 - chiamiamo questa tipologia di vincoli come **subtour elimination constraint**
 
 Quanti sono i subtour elimination constraint?
@@ -93,4 +100,4 @@ il modello è molto simile a prima
 - i degree constraint ora considerano lati e quindi la somma dei lati incidenti di ogni nodo deve valere 2
 - i subtour constraint sono praticamente uguali
 
-Oss: esistono anche dei modelli con un numero polinomiale di vincoli MTZ, ma nella pratica, seppur siano validi, non si riescono a risolvere
+Oss: esistono anche dei modelli con un numero polinomiale di vincoli MTZ, ma nella pratica, seppur siano validi, non si riescono a risolvere in tempi ragionevoli

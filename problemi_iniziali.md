@@ -152,12 +152,12 @@ Problem: find the starting time of each activity so that the total duration (**m
 2. numeriamo i vertici in maniera tale che per ogni arco (vi, vj): i < j
     - assegno un numero solamente ai nodi che non hanno predecessori (parto dal nodo iniziale)
     - dopo aver assegnato un numero, elimino tutti gli archi verso i successori del nodo appena numerato
-        - in questa maniera solamente i nodi senza predecessori possono essere numerati con la garanzia di aver numerato tutt i predecessori (dipendenze) con un numero minore
+        - in questa maniera solamente i nodi senza predecessori possono essere numerati, con la garanzia di aver numerato tutt i predecessori (dipendenze) con un numero minore
     - itero finchè non ho numerato tutti i nodi
 
 3. For each event (vertex) vk, find:
     - T_MIN_k: earliest time at which the activity can start without violating its precedences
-        - (Makespan (length of the longest path from v0 to vn+1) = T_MIN_(n+1))
+        - (Makespan = length of the longest path from v0 to vn+1 = T_MIN_(n+1))
     - T_MAX_k latest time at which the activity must terminate without delaying the project
     - Algoritmo:
         - parti con il nodo sorgente e con il trovare i T_MIN di tutti i nodi
@@ -167,7 +167,7 @@ Problem: find the starting time of each activity so that the total duration (**m
         - etichettati tutti i nodi con il loro T_MIN, si può procedere a calcolare il T_MAX
             - prima si partiva dalla sorgente fino ad arrivare alla destinazione, ora si va a ritroso
             - si parte dalla destinazione, il T_MAX della destinazione è pari al suo T_MIN (se ritardo la fine, ho ritardato il progetto)
-            - il calcolo di T_MAX è analogo a quello di T_MAX ma invertito
+            - il calcolo di T_MAX è analogo a quello di T_MIN ma invertito
                 - ora si considerano i nodi successori
                 - min invece che max
                 - sottrazione invece che somma
