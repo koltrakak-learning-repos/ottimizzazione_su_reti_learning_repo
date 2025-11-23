@@ -14,6 +14,14 @@ l'algoritmo è più efficente
 
 ### Consideriamo il problema del cammino minimo
 
+```
+matrice di incidenza
+- definita per digrafi
+- una riga per vertice
+- una colonna per arco
+- ogni colonna mi dica dove l'arco esce e dove entra
+```
+
 riformuliamo il problema come un problema di flusso di costo minimo
 
 - flusso di valore 1

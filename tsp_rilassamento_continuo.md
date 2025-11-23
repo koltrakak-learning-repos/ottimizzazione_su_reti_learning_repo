@@ -149,32 +149,3 @@ non mi sembra importante
 ...
 
 i vincoli sembrano laschi ma in realtà sono per forza tight a causa del caso in cui xa=0, altrimenti non riesco a completare il tour
-
-# Come gestiamo i vincoli di interezza?
-
-con Branch & Bound
-
-consideriamo il TSP come caso di studio per gestire problemi con un numero esponenziale di vincoli
-
-lo schema di branch and bound Depth-First visto con Martello non è lo schema più efficente per fare branch & bound.
-
-In generale abbiamo 3 scelte da fare nello schema di branch & bound:
-
-- quale problema scegliamo dalla lista?
-  - con martello abbiamo visto DFS
-- che rilassamento risolviamo per ottenere il lowerbound?
-  - con martello abbiamo visto rilassamento continuo
-- come determiniamo i due sottoinsiemi del branching?
-  - con martello togliamo tutta la parte non intera in mezzo (partizioniamo lo spazio in base ad una variabile frazionaria in soluzione)
-  - ma se ho più variabili frazionarie, quale scelgo per il branching?
-  - una possibilità è fare strong-branching in cui si guarda un passo in avanti di un passo risolvendo con simplesso duale le coppie di rilassamenti continui e calcoliamo uno score
-    - riduciamo il numero di nodi
-    - tuttavia abbiamo un forte overhead nel calcolare gli score
-  - per ridurre l'overhead possiamo calcolare delle approssimazioni dei rilassamenti continui
-    - c'è un tradeoff tra tempo di calcolo e precisione dell'approssimazione (che mi riduce il numero di nodi)
-  - oppure possiamo utilizzare pseudocosti in cui
-    - si parte strong-branching
-    - si va avanti per un po' in questo modo in maniera da imparare quali sono le variabili importanti su cui branchare
-    - si procede con approssimazioni
-
-```1 appartiene a S*?```
