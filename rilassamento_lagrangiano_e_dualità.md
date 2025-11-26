@@ -7,28 +7,50 @@ Possiamo avere varie tipologie di rilassamento
 
 Ci interessa particolarmente il **rilassamento Lagrangiano**
 
-### Rilassamento Lagrangiano
+# Rilassamento Lagrangiano
 
-l'idea è spostare dei vincoli in funzione obiettivo, e penalizzare quest'ultima quando i vincoli vengono violati
+l'idea è spostare dei vincoli in funzione obiettivo, e penalizzare quest'ultima quando i vincoli vengono violati, a questo punto possiamo eliminare i vincoli e risolvere il problema rilassato
 
-a questo punto possiamo eliminare i vincoli e risolvere il problema rilassato
+I moltiplicatori sono i pesi che do alla violazione del vincolo
 
-I moltiplicatori sono i pesi che do alla violazione del vincolo e il problema diventa capire quali usare
+- quali moltiplicatori usiamo?
 
 Il problema rilassato mi da un lower bound valido
 
-- possiamo pensare al fatto che la soluzione ottima del problema non rilassato viene migliorata dai moltiplicatori e quindi il problema rilassato può solo fare meglio
+- possiamo pensare al fatto che la soluzione ottima del problema non rilassato viene sicuramente migliorata (non peggiorata) dai moltiplicatori e quindi il problema rilassato può solo fare meglio
 
-La soluzione del rilassamento non è detta che sia ammissibile, ma se lo è, è ottima anche per il prolbema originale (il rilassamento è un lower bound)
+**NB**: La soluzione del rilassamento non è detta che sia ammissibile, ma se lo è, non è detto che sia ottima anche per il problema originale se il lagrangiano ha rilassato delle disuguaglianze
 
-Il problema allora diventa capire quali moltiplicatori usare per ottenere il lower bound maggiore possibile
+- è ottima anche per il problema originale solo se le due funzioni obiettivo hanno lo stesso valore (i moltiplicatori non hanno migliorato il valore della soluzione)
+- guardando la formula, questo succede: o quando il moltiplicatore vale 0, o quando il vincolo è tight, in tutti i vincoli rilassati
 
+**NMB**: Il problema allora diventa capire quali moltiplicatori usare per ottenere il lower bound maggiore (migliore) possibile (quello in cui i termini lagrangiani non mi hanno aiutato)
+
+- ottenere lower bound grandi mi permette di tagliare via molti rami in uno schema branch and bound
+  - se ho una soluzione incumbent di valore già abbastanza basso, avere lower bound alti mi rende più probabile tagliare, altrimenti dovrei esplorare
 - in questa maniera la soluzione del rilassamento si avvicina il più possibile alla soluzione ottima per il non rilassato (che ricordiamo essere lower bounded dal rilassamento)
 - inoltre, è facile che la soluzione del rilassamento diventi anche ammissibile
 
-### Che cosa succede se voglio fare il rilassamento lagrangiano di un LP in forma standard?
+Cercare i moltiplicatori che mi massimizzano il valore del rilassamento mi definiscono un altro LP -> problema lagrangiano duale
 
-... guarda dalla dispensa ...
+**NMB**: il rilassamento lagrangiano permette di trovare l'ottimo del problema non rilassato se riusciamo a trovare quei valori dei moltiplicatori the presence or absence of the constraints does not affect the optimal cost e garantisce che i vincoli rilassati siano rispettati
+
+```It turns out that the right prices can be found by solving a new linear programming problem, called the dual of the original.```
+
+## Rilassamento lagrangiano di equazioni
+
+il procedimento è praticamente identico a prima
+
+stavolta però se i vincoli rispettati il termine lagrangiano diventa nullo
+
+in altre parole **se la soluzione del rilassamento è ammissibile**, allora i valori delle due funzioni obiettivo sono identici, e quindi **la soluzione ottima del rilassamento è ottima anche per il problema originale!**
+
+Il problema diventa quindi trovare il valore dei moltiplicatori tali che i vincoli non siano violati
+
+- "**When the price is properly chosen** (p = 1, in example), the optimal solution to the constrained problem is also optimal for the unconstrained problem."
+- anche qui si passa per il problema (di massimizzazione) del lagrangiano duale
+
+# Rilassamento lagrangiano e dualità
 
 sto spostando tutti i vincoli in funzione obiettivo ed **ottengo in questo modo un problema non vincolato**
 
@@ -76,3 +98,13 @@ Se sfruttiamo anche la linearità dei vincoli otteniamo la dualità forte
 Infine, ora che ho una formula posso anche ricavarmi facilmente tutti gli altri casi del duale
 
 - vedi vincoli con disuguaglianze
+
+```
+In summary, the construction of the dual of a primal minirnization problem can be viewed as follows.
+
+We have a vector of parameters (dual variables) p, and for every p we have a method for obtaining a lower bound on the optimal primal cost (troviamo il minimo del problema non vincolato studiando la derivata della funzione obiettivo con i termini lagrangiani).
+
+The dual problem is a maximization problem that looks for the tightest such lower bound with p as the vector of decision variables.
+
+Il dual problem sembra quindi non essere soggetto a vincoli, tuttavia, for some vectors p, the corresponding lower bound is equal to -inf, e nel contesto di un problema di massimizzazione does not carry any useful information. Thus, we only need to maximize over those p that lead to nontrivial lower bounds, and this is what gives rise to the dual constraints.
+```
