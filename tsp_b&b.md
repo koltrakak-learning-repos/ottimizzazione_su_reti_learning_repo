@@ -6,8 +6,8 @@ consideriamo il TSP come caso di studio per gestire problemi con un numero espon
 
 Fare B&B con TSP è simile a fare B&B con qualsiasi altro TSP
 
-- ad ogni risolvo il rilassamento continuo del TSP
-- **NB**: stavolta per risolvere il rilassamento continuo devo risolvere il problema di separazione il che consiste nel risolvere diversi ILP iterando
+- ad ogni nodo risolvo il rilassamento continuo del TSP
+  - **NB**: stavolta per risolvere il rilassamento continuo devo risolvere il problema di separazione il che consiste nel risolvere diversi ILP iterando
 - ottenuta la soluzione del rilassamento continuo continuo il branch and bound come prima
 - se la soluzione del rilassamento è intera ho ottenuto una incumbent solution, altrimenti branch producendo due sottoproblemi con una disuguaglianza in più su una variabile frazionaria
 - applico il bounding come sempre quando ci sono nodo con un lowerbound > della incumbent solution
